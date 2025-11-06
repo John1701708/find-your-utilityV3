@@ -20,7 +20,6 @@ export default async function handler(req, res) {
     const state = place?.state || 'Unknown state';
 
     const utility = `${city}, ${state}`;
-
     return res.json({ ok: true, utility, meta: 'Data via Zippopotam.us' });
   } catch (err) {
     console.error('lookup error', err);
