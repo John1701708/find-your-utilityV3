@@ -6,103 +6,186 @@
   <title>Find Your Utility ⚡</title>
   <link rel="preconnect" href="https://ucarecdn.com">
   <style>
-    :root{--blue-600:#0b64d6;--blue-700:#0447a6;--muted:#6b7280;--card:#fff;--bg:#f4f7fb;}
+    :root{
+      --blue-600:#0b64d6;
+      --blue-700:#0447a6;
+      --muted:#6b7280;
+      --card:#ffffff;
+      --bg:#f4f7fb;
+    }
     *{box-sizing:border-box}
-    body{margin:0;font-family:Inter,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,#f7fbff,#eef6ff);color:#0f1724;min-height:100vh}
-    header{display:flex;align-items:center;justify-content:space-between;padding:18px 32px;background:#fff8;backdrop-filter:blur(6px);box-shadow:0 2px 8px rgba(3,7,18,0.06)}
+    body{margin:0;font-family:Inter,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,#f7fbff 0%, #eef6ff 100%);color:#0f1724;min-height:100vh}
+    header{display:flex;align-items:center;justify-content:space-between;padding:18px 32px;background:linear-gradient(90deg,rgba(255,255,255,0.6),rgba(255,255,255,0.3));backdrop-filter:blur(6px);box-shadow:0 2px 8px rgba(3,7,18,0.06)}
     .brand{display:flex;align-items:center;gap:12px}
-    .logo{width:40px;height:40px;border-radius:8px;background:linear-gradient(135deg,var(--blue-600),var(--blue-700));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:20px;box-shadow:0 6px 18px rgba(11,100,214,0.25)}
+    .logo {
+      width:40px;height:40px;border-radius:8px;background:linear-gradient(135deg,var(--blue-600),var(--blue-700));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:20px;box-shadow:0 6px 18px rgba(11,100,214,0.25)
+    }
     nav a{margin-left:18px;color:var(--muted);text-decoration:none;font-weight:600}
     nav a:hover{color:var(--blue-700)}
     .container{max-width:980px;margin:48px auto;padding:0 20px}
     .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center}
-    .panel{background:var(--card);border-radius:14px;padding:28px;box-shadow:0 20px 45px rgba(12,34,98,0.07);}
+    .panel{
+      background:var(--card);border-radius:14px;padding:28px;box-shadow:0 20px 45px rgba(12,34,98,0.07);
+    }
     .title{font-size:28px;color:var(--blue-700);margin-bottom:8px}
     .subtitle{color:var(--muted);margin-bottom:18px}
     .search-row{display:flex;gap:12px;align-items:center}
     input.zip{flex:1;padding:12px 14px;border-radius:9px;border:1px solid #e6eefb;font-size:16px;background:#fbfdff}
-    button.search{background:linear-gradient(180deg,var(--blue-600),var(--blue-700));color:#fff;padding:12px 18px;border-radius:10px;border:none;font-weight:700;cursor:pointer;box-shadow:0 10px 20px rgba(11,100,214,0.18)}
+    button.search{background:linear-gradient(180deg,var(--blue-600),var(--blue-700));color:white;padding:12px 18px;border-radius:10px;border:none;font-weight:700;cursor:pointer;box-shadow:0 10px 20px rgba(11,100,214,0.18)}
     button.search:active{transform:translateY(1px)}
     .result-card{margin-top:18px;padding:16px;border-radius:10px;background:linear-gradient(180deg,#f7fbff,#f1f8ff);border:1px solid #e6f0ff}
     .utility-name{font-weight:700;color:#07356b;font-size:18px}
     .meta{color:var(--muted);font-size:14px;margin-top:6px}
-    .support-floating{position:fixed;right:22px;bottom:22px;width:58px;height:58px;border-radius:50%;background:var(--blue-700);color:#fff;border:none;box-shadow:0 10px 30px rgba(11,100,214,0.25);cursor:pointer;font-size:22px;display:flex;align-items:center;justify-content:center}
+    .right-card{display:flex;flex-direction:column;gap:12px}
+    .right-card .card{padding:18px;border-radius:12px;background:linear-gradient(180deg,#ffffff,#fbfdff);box-shadow:0 10px 30px rgba(11,33,88,0.04)}
+    .small{font-size:13px;color:var(--muted)}
+    .support-floating{position:fixed;right:22px;bottom:22px;width:58px;height:58px;border-radius:50%;background:var(--blue-700);color:white;border:none;box-shadow:0 10px 30px rgba(11,100,214,0.25);cursor:pointer;font-size:22px;display:flex;align-items:center;justify-content:center}
+    .support-floating:hover{transform:scale(1.05)}
     .modal-backdrop{position:fixed;inset:0;background:rgba(7,12,34,0.45);display:none;align-items:center;justify-content:center;padding:20px;z-index:200}
-    .modal{width:100%;max-width:520px;background:#fff;border-radius:12px;padding:20px;box-shadow:0 20px 60px rgba(3,7,18,0.35)}
+    .modal{width:100%;max-width:520px;background:white;border-radius:12px;padding:20px;box-shadow:0 20px 60px rgba(3,7,18,0.35)}
+    .modal h3{color:var(--blue-700);margin:0 0 8px}
+    .modal label{font-weight:600;font-size:13px;color:#253047;display:block;margin-top:10px}
+    .modal input,.modal textarea{width:100%;padding:10px;border:1px solid #e6eefb;border-radius:8px;margin-top:8px;font-size:14px}
+    .modal .actions{display:flex;gap:10px;justify-content:flex-end;margin-top:12px}
+    .btn-ghost{background:#f3f6fb;border:1px solid #e2eefb;padding:10px 14px;border-radius:8px;cursor:pointer}
+    .btn-primary{background:linear-gradient(180deg,var(--blue-600),var(--blue-700));color:white;padding:10px 14px;border-radius:8px;border:none;cursor:pointer;font-weight:700}
     footer{max-width:980px;margin:28px auto;color:var(--muted);font-size:13px;text-align:center}
   </style>
 </head>
 <body>
   <header>
-    <div class="brand"><div class="logo">⚡</div><div><b>Find Your Utility</b><div style="font-size:12px;color:gray">Locate your energy provider</div></div></div>
-    <nav><a href="#">Home</a><a href="#">About</a></nav>
+    <div class="brand">
+      <div class="logo">⚡</div>
+      <div>
+        <div style="font-weight:700;color:var(--blue-700)">Find Your Utility</div>
+        <div class="small">Locate your electric & gas providers</div>
+      </div>
+    </div>
+    <nav>
+      <a href="#" onclick="goHome(event)">Home</a>
+      <a href="#" onclick="openAbout(event)">About</a>
+    </nav>
   </header>
 
   <main class="container">
     <div class="hero">
       <div class="panel">
         <div class="title">Find your local utility provider</div>
-        <div class="subtitle">Enter any U.S. ZIP code to see your state and city info instantly.</div>
+        <div class="subtitle">Enter any U.S. ZIP code — results come from Zippopotam.us API.</div>
         <div class="search-row">
-          <input id="zip" class="zip" maxlength="5" placeholder="Enter ZIP (e.g. 44101)" />
-          <button id="btnSearch" class="search">Search</button>
+          <input id="zip" class="zip" type="text" maxlength="5" placeholder="Enter ZIP (e.g. 44101)" />
+          <button class="search" id="btnSearch">Search</button>
         </div>
-        <div id="status" style="margin-top:10px;color:gray"></div>
+        <div id="status" class="small" style="margin-top:10px;color:var(--muted)"></div>
         <div id="result" class="result-card" style="display:none;">
           <div class="utility-name" id="utilityName"></div>
           <div class="meta" id="utilityMeta"></div>
         </div>
       </div>
-      <div>
-        <p>Click the chat icon below to contact support anytime.</p>
+      <div class="right-card">
+        <div class="card">
+          <div style="font-weight:700;color:#0b2c5a">How it works</div>
+          <div class="small" style="margin-top:8px">This tool queries Zippopotam.us to find the city & state for a ZIP code.</div>
+        </div>
+        <div class="card">
+          <div style="font-weight:700;color:#0b2c5a">Need help?</div>
+          <div class="small" style="margin-top:8px">Click the support button at the bottom-right to send a message.</div>
+        </div>
       </div>
     </div>
   </main>
 
   <footer>© <span id="year"></span> Find Your Utility • Data via Zippopotam.us</footer>
 
-  <button class="support-floating" id="openSupport">💬</button>
+  <button class="support-floating" id="openSupport" aria-label="Support">💬</button>
 
-  <div id="modal" class="modal-backdrop">
+  <div id="modal" class="modal-backdrop" role="dialog" aria-hidden="true">
     <div class="modal">
       <h3>Support</h3>
       <form id="supportForm">
-        <label>Title</label>
-        <input id="title" required />
-        <label>Message</label>
-        <textarea id="message" rows="4" required></textarea>
+        <label for="title">Title</label>
+        <input id="title" name="title" required />
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
         <input type="hidden" role="uploadcare-uploader" name="attachment" data-public-key="93421cc4c0211b5c1d86" data-max-size="31457280" />
-        <div style="margin-top:12px;text-align:right">
-          <button type="button" id="closeModal">Cancel</button>
-          <button type="submit" style="background:#0b64d6;color:#fff;border:none;padding:10px 14px;border-radius:8px">Send</button>
+        <div class="actions">
+          <button type="button" class="btn-ghost" id="closeModal">Cancel</button>
+          <button type="submit" class="btn-primary">Send</button>
         </div>
       </form>
     </div>
   </div>
 
-  <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
+  <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js" defer></script>
+
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-    const modal = document.getElementById('modal');
-    document.getElementById('openSupport').onclick=()=>modal.style.display='flex';
-    document.getElementById('closeModal').onclick=()=>modal.style.display='none';
-    window.onclick=e=>{if(e.target===modal)modal.style.display='none';};
+    const modalBackdrop = document.getElementById('modal');
+    document.getElementById('openSupport').addEventListener('click', () => { modalBackdrop.style.display = 'flex'; });
+    document.getElementById('closeModal').addEventListener('click', () => { modalBackdrop.style.display = 'none'; });
 
-    async function searchZip(zip){
-      const status=document.getElementById('status');
-      const result=document.getElementById('result');
-      const name=document.getElementById('utilityName');
-      const meta=document.getElementById('utilityMeta');
-      if(!/^[0-9]{5}$/.test(zip)){status.textContent='Enter valid 5-digit ZIP.';result.style.display='none';return;}
-      status.textContent='Searching...';
-      try{
-        const res=await fetch('/api/lookup',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({zip})});
-        const j=await res.json();
-        if(!j.ok){status.textContent=j.error;result.style.display='none';return;}
-        name.textContent=j.utility;meta.textContent=j.meta;result.style.display='block';status.textContent='';
-      }catch(e){status.textContent='Network error. Try again.';}
+    const zipInput = document.getElementById('zip');
+    const btnSearch = document.getElementById('btnSearch');
+    const status = document.getElementById('status');
+    const resultCard = document.getElementById('result');
+    const utilityNameEl = document.getElementById('utilityName');
+    const utilityMetaEl = document.getElementById('utilityMeta');
+
+    async function searchZip(zip) {
+      if (!/^\d{5}$/.test(zip)) {
+        status.textContent = 'Please enter a valid 5-digit US ZIP code.';
+        resultCard.style.display = 'none';
+        return;
+      }
+      status.textContent = 'Looking up ZIP...';
+      resultCard.style.display = 'none';
+      try {
+        const res = await fetch('https://find-your-utility-v3.vercel.app/api/lookup', {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({ zip })
+        });
+        const j = await res.json();
+        if (!j.ok) {
+          status.textContent = j.error || 'Lookup failed — try again later.';
+          return;
+        }
+        utilityNameEl.textContent = j.utility;
+        utilityMetaEl.textContent = j.meta;
+        resultCard.style.display = 'block';
+        status.textContent = '';
+      } catch (err) {
+        console.error(err);
+        status.textContent = 'Network error — try again later.';
+      }
     }
-    document.getElementById('btnSearch').onclick=()=>searchZip(document.getElementById('zip').value.trim());
+
+    btnSearch.addEventListener('click', () => searchZip(zipInput.value.trim()));
+    zipInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); searchZip(zipInput.value.trim()); }});
+
+    const supportForm = document.getElementById('supportForm');
+    supportForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const title = document.getElementById('title').value.trim();
+      const message = document.getElementById('message').value.trim();
+      const attachmentInput = document.querySelector('input[name="attachment"]');
+      const fileValue = attachmentInput ? attachmentInput.value : '';
+      const payload = { title, message, attachment: fileValue };
+      try {
+        await fetch('https://formspree.io/f/mgvnbbaw', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept':'application/json' },
+          body: JSON.stringify(payload)
+        });
+      } catch (err) {
+        console.error('Form submit error', err);
+      } finally {
+        modalBackdrop.style.display = 'none';
+      }
+    });
+
+    function openAbout(e){e.preventDefault();alert('Find Your Utility helps you find your city and state by ZIP code using real data.');}
+    function goHome(e){e.preventDefault();window.scrollTo({top:0,behavior:'smooth'});}
   </script>
 </body>
 </html>
